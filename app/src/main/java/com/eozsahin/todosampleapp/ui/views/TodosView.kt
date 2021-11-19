@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +27,10 @@ fun TodosView(
     viewModel: TodoListViewModel
 ) {
     val todos = viewModel.todos
+    LaunchedEffect(key1 = "fetch") {
+        viewModel.fetchTodos()
+    }
+
     TodoList(Modifier.fillMaxSize(), todos)
 }
 

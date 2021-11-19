@@ -11,14 +11,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TodoListViewModel @Inject constructor(
-    todoRepository: TodoRepository
+    private val todoRepository: TodoRepository
 ): ViewModel() {
     var todos = mutableStateListOf<TodoModel>()
 
-    init {
+    suspend fun fetchTodos() {
         viewModelScope.launch {
-            val fetchedTodos = todoRepository.fetchTodos()
+            val fetchedTodos = todoRepository.getTodos()
                 .map { TodoModel(it.title, it.completed) }
+            todos.clear()
             todos.addAll(fetchedTodos)
         }
     }

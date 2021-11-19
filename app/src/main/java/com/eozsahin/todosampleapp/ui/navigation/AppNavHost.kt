@@ -7,7 +7,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.eozsahin.todosampleapp.api.Todo
+import com.eozsahin.todosampleapp.ui.viewmodels.AddTodoViewModel
 import com.eozsahin.todosampleapp.ui.viewmodels.TodoListViewModel
+import com.eozsahin.todosampleapp.ui.views.AddTodoView
 import com.eozsahin.todosampleapp.ui.views.TodosView
 
 private object Routes {
@@ -42,8 +44,8 @@ fun AppNavHost(navController: NavHostController) {
         }
 
         composable(Screens.AddTodo.route) {
-            //val viewModel = CreatePostViewModel()
-            //CreatePostScreen(viewModel, navController)
+            val viewModel: AddTodoViewModel = hiltViewModel()
+            AddTodoView(navController, viewModel)
         }
     }
 }
